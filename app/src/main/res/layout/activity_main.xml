@@ -195,7 +195,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/mediaD"
+                android:id="@+id/medialinksdocsblock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/idOnwhatApp"
@@ -315,6 +315,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/encryptionBlock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp">
