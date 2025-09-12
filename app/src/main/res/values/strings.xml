@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">whatsApp</string>
     <string name="what_header">Hey there I am using WhatSApp</string>
+    <string name="user_name">Bod</string>
 </resources>

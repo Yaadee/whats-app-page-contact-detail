@@ -1,119 +1,85 @@
 package com.example.whatsapp
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.res.Resources
-import android.media.metrics.Event
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.res.ResourcesCompat
-import com.example.whatsapp.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.whatsapp.ui.theme.WhatsAppTheme
-import kotlin.time.TimeSource
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var newRecyclerView: RecyclerView
+    private  lateinit var userList: ArrayList<profileData>
+    lateinit var profileImage: Array<Int>
+    lateinit var username: Array<String>
+    lateinit var description: Array<String>
 
-    @SuppressLint("ResourceType", "MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(binding.root)
+        setContentView(R.layout.fragment_whats_app_home_page)
 
 
-        binding.callContent.backgroundAndToast("Calling...", "header")
-        binding.videocallcontent.backgroundAndToast("Video calling", "header")
-        binding.searchContent.backgroundAndToast("Searching", "header")
-        binding.medialinksdocsblock.backgroundAndToast("Media, links and docs", "not")
-        binding.mediaContent.backgroundAndToast("Media Content",  "not")
-       binding.encryptionBlock.backgroundAndToast("Encryption...", "not")
-       binding.disappearingBody.backgroundAndToast("Disappearing messages", "not")
-        binding.chatLockBody.backgroundAndToast("Chat Lock", "not")
-       binding.advancedSecurityBody.backgroundAndToast("Advanced Security", "not")
 
+profileImage = arrayOf(
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator,
+    R.drawable.avator
 
-binding.commonGroupContainer.backgroundAndToast("Add to group", "not")
+)
+username = arrayOf("Bob", "Joe", "Doe", "Jane","John", "Joe", "Doe", "Jane")
+   description = arrayOf(
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",
+       "Hey there I am using WhatSApp",)
 
+        newRecyclerView = findViewById(R.id.recycleView)
+        newRecyclerView.layoutManager = LinearLayoutManager(this)
+        newRecyclerView.setHasFixedSize(true)
 
-binding.otherphoneId.backgroundAndToast("Other Phone", "not")
- binding.otherCallId.backgroundAndToast("Calling ...", "not")
-        binding.otherChatid.backgroundAndToast("Chatting...", "not")
-        binding.otherVideoCallId.backgroundAndToast("Video call", "not")
-
-
-      binding.favouriteBlock.backgroundAndToast("Added to favorite", "not")
-        binding.addToListBlock.backgroundAndToast("Add to list", "not")
-binding.blockUserBlock.backgroundAndToast("Block User", "not")
-
-
-binding.reportUserBlock.backgroundAndToast("Report User", "not" )
+        userList = arrayListOf<profileData>()
+        getUserData()
 
     }
 
+    private fun getUserData() {
+      for(i in profileImage.indices){
+          val userprofile = profileData(profileImage[i], username[i], description[i])
+          Log.d(TAG, " ${userprofile} ")
+          userList.add(userprofile)
+      }
+
+        var adaptor = profileAdapter(userList)
+        newRecyclerView.adapter = adaptor
+        adaptor.setOnClickItemListener(object : profileAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@MainActivity, "you clicked on position${position}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        }
+
+
+
+
 }
-
-
-
-
-
- @SuppressLint("ClickableViewAccessibility")
- fun View.backgroundAndToast(msg: CharSequence, type:String ) {
-     val context = this.context
-
-     this.setOnTouchListener { v, event ->
-             when (event.action) {
-                 MotionEvent.ACTION_DOWN -> {
-                     if(type == "header"){
-                         v.setBackgroundResource(R.drawable.colored_layout_bg)
-                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        true
-                     }
-                     else {
-                         v.setBackgroundResource(R.color.whiteGray)
-                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                         true
-                     }
-                      true
-                 }
-
-                 MotionEvent.ACTION_UP -> {
-                     if(type == "header"){
-
-                         v.setBackgroundResource(R.drawable.layout_bg)
-                         true
-                     } else {
-                         v.setBackgroundResource(R.color.white)
-
-                     }
-                     true
-                 }
-
-
-                 else -> false
-
-
-             }
-
-
-     }
-
-
- }
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

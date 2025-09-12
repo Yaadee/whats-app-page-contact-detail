@@ -48,6 +48,18 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="30dp"
+                android:layout_toStartOf="@id/avator"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/back"
+
+
+
+                />
+
 
         </RelativeLayout>
 
@@ -161,20 +173,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/callSearch"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-
-            android:background="@drawable/layout_bg"
-
-            >
 
             <RelativeLayout
                 android:id="@+id/idOnwhatApp"
@@ -182,6 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_below="@id/callSearch"
                 android:background="@drawable/layout_bg"
                 android:padding="12dp">
 
@@ -212,34 +211,24 @@
             </RelativeLayout>
 
 
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/notificationMedia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/description"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/layout_bg"
-
-            >
 
             <LinearLayout
+
+                android:id="@+id/notificationMedia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/medialinksdocsblock"
+                android:layout_margin="10dp"
+                android:background="@drawable/layout_bg"
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
-
                 >
 
                 <RelativeLayout
                     android:id="@+id/notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/cardview_default_radius"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
 
                     >
@@ -254,11 +243,14 @@
                         android:src="@drawable/bell" />
 
                     <TextView
+                        android:id="@+id/notificationText"
+                        android:padding="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="25dp"
+                        android:textSize="17sp"
                         android:layout_toEndOf="@id/bellIcon"
                         android:text="Notification" />
 
@@ -282,9 +274,11 @@
 
                     <TextView
                         android:layout_width="match_parent"
+                        android:padding="2dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="25dp"
+                        android:textSize="17sp"
                         android:layout_toEndOf="@id/media"
                         android:text="Media Visibility " />
 
@@ -295,7 +289,7 @@
             </LinearLayout>
 
 
-        </RelativeLayout>
+
 
 
         <RelativeLayout
@@ -348,6 +342,7 @@
                         android:id="@+id/encriptionText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:layout_below="@id/encriptionTitle"
                         android:layout_toEndOf="@id/encriptionicon"
                         android:paddingStart="10dp"
@@ -607,7 +602,7 @@
 
                 <TextView
                     android:id="@+id/addToFavouriteText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/addFavouriteIcon"
                     android:layout_marginStart="5dp"
@@ -628,7 +623,7 @@
 
                 <TextView
                     android:id="@+id/addToListText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/addUserIcon"
                     android:layout_centerVertical="true"
@@ -667,7 +662,7 @@
 
                 <TextView
                     android:id="@+id/blockText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/blockUserIcon"
                     android:layout_centerVertical="true"
@@ -698,7 +693,7 @@
 
                 <TextView
                     android:id="@+id/reportUserText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/reportUserIcon"
                     android:layout_centerVertical="true"
