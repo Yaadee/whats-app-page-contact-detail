@@ -1,18 +1,26 @@
 package com.example.whatsapp
 
+import android.Manifest.permission.CALL_PHONE
+import android.Manifest.permission.READ_CONTACTS
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.whatsapp.databinding.ActivityMainBinding
-
+import kotlinx.serialization.descriptors.PrimitiveKind
+import java.util.jar.Manifest
 
 
 class DetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    private val CALL_PHONE_PERMISSION_CODE = 100
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +39,63 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra("username")
         val description = intent.getStringExtra("description")
 
-
+// Explicit intent Example
         binding.username.text = username
         binding.avator.setImageResource(profileImage)
         binding.description.text = description
+
+
+
+        // Implicit Intent
+
+        binding.callContent.setOnClickListener {
+           val phone_number = binding.description.text.toString()
+            if (phone_number.isNotEmpty()) {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        CALL_PHONE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+
+                    val phone_intent = Intent(Intent.ACTION_CALL)
+                    phone_intent.data = Uri.parse("tel:$phone_number")
+                    startActivity(phone_intent)
+                } else {
+                    requestPermission()
+                }
+            } else {
+                Toast.makeText(this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(READ_CONTACTS), 100)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        // Check if the response matches the call phone permission request code
+        if (requestCode == CALL_PHONE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            } else {
+                // Permission was denied
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+
 
 
 
@@ -70,6 +131,18 @@ class DetailActivity : AppCompatActivity() {
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
