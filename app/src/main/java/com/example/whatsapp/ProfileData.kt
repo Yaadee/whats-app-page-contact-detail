@@ -1,9 +1,7 @@
 package com.example.whatsapp
 
-import android.widget.ImageView
-
-data class profileData(
-    val profile: Int,
+data class ProfileData(
+    val profile:Int,
     val userName:String,
     val description:String
 

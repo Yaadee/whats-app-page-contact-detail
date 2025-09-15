@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@color/white"
-
-        >
+        android:orientation="horizontal">
 
 
         <ImageView
             android:id="@+id/profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:padding="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
             android:src="@drawable/avator" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/profile"
-            android:textSize="15sp"
+            android:textStyle="bold"
             android:text="Username"
+            android:textSize="15sp"
 
             />
+
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
             android:layout_below="@id/username"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
             android:layout_toEndOf="@id/profile"
             android:text="description"
             android:textSize="10sp"
 
             />
-
-
 
 
     </RelativeLayout>
